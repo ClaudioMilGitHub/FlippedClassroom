@@ -3,6 +3,8 @@ import {Result} from "../../models/Result";
 import {Subscription} from "rxjs";
 import {DomandaService} from "../../services/domanda.service";
 import {QuizOptions} from "../../models/QuizOptions";
+import {CategoryService} from "../../services/category.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-domanda-list',
@@ -13,18 +15,14 @@ export class DomandaListComponent implements OnInit, OnDestroy{
 
   result: Result;
   resultSub: Subscription;
+  options: QuizOptions;
 
-  constructor(private domandaService: DomandaService) {
+  constructor(private domandaService: DomandaService, private router: Router) {
+    this.options = this.router.getCurrentNavigation()?.extras?.state as QuizOptions;
   }
 
   ngOnInit() {
-    const options: QuizOptions = {
-      amount: 10,
-      category: 22,
-      difficulty: 'medium',
-      type: 'multiple',
-    }
-    this.resultSub = this.domandaService.getResult(options).subscribe({
+    this.resultSub = this.domandaService.getResult(this.options).subscribe({
       next: (response) => {
         this.result = response;
         console.log('Risposta ricevuta:', response); // Log per debug

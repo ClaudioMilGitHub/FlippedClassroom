@@ -2,20 +2,20 @@
   <div class="col-12 d-flex">
     <mat-card class="options-card mx-auto w-100">
       <mat-card-content>
-        <form [formGroup]="optionsForm" (ngSubmit)="sendRequestOptions()" class="d-flex flex-column w-100">
+        <form [formGroup]="optionsForm" (ngSubmit)="makeRequestOptions()" class="d-flex flex-column w-100">
           <mat-form-field>
             <mat-label>Number of Questions</mat-label>
-            <input type="number" matInput>
+            <input type="number" matInput formControlName="amount">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Select Category</mat-label>
-            <mat-select>
-              <mat-option value="one" *ngFor="let category of categories">{{ category }}</mat-option>
+            <mat-select formControlName="category">
+              <mat-option value=" {{category.id}} " *ngFor="let category of categories">{{ category.name }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Select Difficulty</mat-label>
-            <mat-select>
+            <mat-select formControlName="difficulty">
               <mat-option value="easy"> Easy </mat-option>
               <mat-option value="medium"> Medium </mat-option>
               <mat-option value="hard"> Hard </mat-option>
@@ -23,7 +23,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Select Type</mat-label>
-            <mat-select>
+            <mat-select formControlName="type">
               <mat-option value="boolean"> True or False </mat-option>
               <mat-option value="multiple"> Multiple Choice </mat-option>
             </mat-select>

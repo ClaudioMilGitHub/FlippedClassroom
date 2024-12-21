@@ -14,26 +14,27 @@ export class DomandaService {
   constructor(private http: HttpClient) {
   }
 
-  buildQuizUrl(options: QuizOptions): string{
+  buildQuizUrl(options: QuizOptions): string {
 
     const baseUrl = "https://opentdb.com/api.php?";
     const params = new URLSearchParams();
 
-    if(options.amount) {
-      params.append('amount', options.amount.toString());
+    if(typeof options !== "undefined") {
+      if(options?.amount) {
+        params.append('amount', options.amount.toString());
+      }
+      if(options?.category) {
+        params.append('category', options.category.toString());
+      }
+      if(options?.difficulty) {
+        params.append('difficulty', options.difficulty.toString());
+      }
+      if(options?.type) {
+        params.append('type', options.type.toString());
+      }
+      return baseUrl + params.toString();
     }
-    if(options.category) {
-      params.append('category', options.category.toString());
-    }
-    if(options.difficulty) {
-      params.append('difficulty', options.difficulty.toString());
-    }
-    if(options.type) {
-      params.append('type', options.type.toString());
-    }
-
-    return baseUrl + params.toString();
-
+    return baseUrl + 'amount=10';
   }
 
   getResult(options: QuizOptions): Observable<Result> {

@@ -21,6 +21,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import { DialogQuizResultsComponent } from './components/dialogs/dialog-quiz-results/dialog-quiz-results.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {MatSelectModule} from "@angular/material/select";
     DomandaListComponent,
     ToolbarComponent,
     HomepageComponent,
-    OptionsComponent
+    OptionsComponent,
+    DialogQuizResultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {MatSelectModule} from "@angular/material/select";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
