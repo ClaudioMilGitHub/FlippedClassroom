@@ -1,0 +1,38 @@
+<mat-card class="question-card">
+  <mat-card-header>
+    <mat-card-title>
+      <strong>Domanda:</strong> {{ item.question }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <div *ngIf="!answered">
+        <div>
+          <mat-list>
+            <mat-list-item *ngFor="let answer of item.mixedAnswers">
+              <button mat-raised-button color="primary" (click)="checkAnswer(answer)">{{ answer }}</button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+      <div *ngIf="answered">
+        <div>
+          <mat-list>
+            <mat-list-item *ngFor="let incorrectAnswer of item.incorrect_answers">
+              <mat-icon color="warn">close</mat-icon>
+              <button mat-raised-button color="primary">{{ incorrectAnswer }}</button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div>
+          <mat-list>
+            <mat-list-item>
+              <mat-icon color="primary">check</mat-icon>
+              <span class="correct-answer">{{ item.correct_answer }}</span>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

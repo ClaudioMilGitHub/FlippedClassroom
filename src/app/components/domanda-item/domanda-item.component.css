@@ -1,0 +1,20 @@
+.question-card {
+  margin: 16px 0;
+  padding: 16px;
+  background-color: lightgray;
+}
+
+.correct-answer {
+  font-weight: bold;
+  color: green;
+}
+
+mat-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-icon {
+  vertical-align: middle;
+}

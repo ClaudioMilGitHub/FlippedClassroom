@@ -1,0 +1,18 @@
+<div class="" *ngIf="result; else loading">
+  <div *ngIf="result.results?.length > 0; else noResults">
+    <mat-list>
+      <app-domanda-item  *ngFor="let item of result.results"[item]="item"></app-domanda-item>
+    </mat-list>
+  </div>
+</div>
+
+<!-- Template per il caricamento -->
+<ng-template #loading>
+  <p>Caricamento in corso...</p>
+</ng-template>
+
+<!-- Template per l'assenza di risultati -->
+<ng-template #noResults>
+  <p>Nessuna domanda disponibile.</p>
+</ng-template>
+
