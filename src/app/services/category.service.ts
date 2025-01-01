@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {CategoryRequest} from "../models/Category/CategoryRequest";
 import {Observable} from "rxjs";
@@ -10,7 +10,8 @@ export class CategoryService {
 
   categoryRequest: CategoryRequest;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCategoryRequest(): Observable<CategoryRequest> {
     return this.http.get<CategoryRequest>('https://opentdb.com/api_category.php');

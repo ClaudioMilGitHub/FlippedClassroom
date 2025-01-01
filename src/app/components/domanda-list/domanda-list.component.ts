@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Result} from "../../models/Result";
+import {QuestionRequest} from "../../models/Question/QuestionRequest";
 import {Subscription} from "rxjs";
 import {DomandaService} from "../../services/domanda.service";
 import {QuizOptions} from "../../models/QuizOptions";
@@ -11,9 +11,9 @@ import {Router} from "@angular/router";
   templateUrl: './domanda-list.component.html',
   styleUrls: ['./domanda-list.component.css']
 })
-export class DomandaListComponent implements OnInit, OnDestroy{
+export class DomandaListComponent implements OnInit, OnDestroy {
 
-  result: Result;
+  result: QuestionRequest;
   resultSub: Subscription;
   options: QuizOptions;
 
@@ -25,16 +25,18 @@ export class DomandaListComponent implements OnInit, OnDestroy{
     this.resultSub = this.domandaService.getResult(this.options).subscribe({
       next: (response) => {
         this.result = response;
-        console.log('Risposta ricevuta:', response); // Log per debug
         this.result.results.forEach((t) => {
           t.question = new DOMParser().parseFromString(t.question, 'text/html').body.textContent;
           const allAnswers = [...t.incorrect_answers, t.correct_answer];
-          t.mixedAnswers = this.shuffleArray(allAnswers);
+          const shuffledAnswers = this.shuffleArray(allAnswers);
+
+          t.mixedAnswers = shuffledAnswers.map(answer => ({
+            text: answer,
+            isCorrect: answer === t.correct_answer
+          }))
         })
-        console.log(response);
       }
     })
-
   }
 
   private shuffleArray(array: string[]): string[] {

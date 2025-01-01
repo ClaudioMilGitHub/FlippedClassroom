@@ -11,13 +11,17 @@ export class DialogQuizResultsComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogQuizResultsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {correctAnswers: number},
-    private router: Router
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: { correctAnswers: number },
+    private router: Router,
+  ) {
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
-    this.router.navigateByUrl('').then(r => console.log(r));
   }
 
+  closeDialogAndRestart() {
+    this.dialogRef.close();
+    this.router.navigateByUrl('options').then(r => console.log(r));
+  }
 }

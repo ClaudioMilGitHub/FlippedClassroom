@@ -1,9 +1,10 @@
 <h1 mat-dialog-title>Dettagli Utente</h1>
 <div mat-dialog-content>
   <p>
-    Hai risposto correttamente a {{ data.correctAnswers }} domande!
+    Correct Answers: {{ data.correctAnswers }}
   </p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Chiudi</button>
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button mat-button (click)="closeDialogAndRestart()">Restart</button>
 </div>

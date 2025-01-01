@@ -1,8 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Question} from "../../models/Question";
+import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
+import {Question} from "../../models/Question/Question";
 import {QuizOptions} from "../../models/QuizOptions";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogQuizResultsComponent} from "../dialogs/dialog-quiz-results/dialog-quiz-results.component";
+import {DomandaStateService} from "../../services/domanda-state.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-domanda-item',
@@ -13,50 +15,50 @@ export class DomandaItemComponent implements OnInit {
 
   @Input('item') item: Question;
   @Input('options') options: QuizOptions;
-  answered: boolean = false;
-  static counterCorrect: number = 0;
-  static counterWrong: number = 0;
-  static answersGiven: number = 0;
-  static questionsLeft: number = 0
+  isSelected: boolean = false;
+  isCorrect: boolean;
+  isAnswered: boolean = false;
+  selectedIndex: number;
 
-  constructor(private dialog: MatDialog) {
-    DomandaItemComponent.counterCorrect = 0;
-    DomandaItemComponent.counterWrong = 0;
-    DomandaItemComponent.answersGiven = 0;
+
+  constructor(private dialog: MatDialog, private domandaStateService: DomandaStateService) {
   }
 
   ngOnInit() {
-    if(typeof this.options === 'undefined') {
+    this.domandaStateService.resetState();
+    if (typeof this.options === 'undefined') {
       this.options = {
         amount: 10
       }
-      DomandaItemComponent.questionsLeft = this.options.amount;
     }
+    this.domandaStateService.questionsLeft = this.options.amount;
+    this.item.mixedAnswers;
   }
 
-  checkAnswer(answer: string) {
-    if (answer === this.item.correct_answer) {
-      DomandaItemComponent.counterCorrect++;
-      DomandaItemComponent.answersGiven++;
+  checkAnswer(selectedAnswer: { text: string, isCorrect: boolean }, index: number): void {
+    if (selectedAnswer.isCorrect) {
+      this.domandaStateService.increaseCorrectAnswer();
+      this.isCorrect = true;
     } else {
-      DomandaItemComponent.counterWrong++;
-      DomandaItemComponent.answersGiven++;
+      this.domandaStateService.increaseWrongsAnswers();
+      this.isCorrect = false;
     }
-    this.answered = true;
-    console.log(this.options.amount);
-    console.log(DomandaItemComponent.answersGiven);
-    DomandaItemComponent.questionsLeft = this.options.amount - DomandaItemComponent.answersGiven;
-    console.log('Domande rimaste ' + DomandaItemComponent.questionsLeft);
-    if (DomandaItemComponent.questionsLeft == 0 ) {
+    this.selectedIndex = index;
+    this.isSelected = true;
+    this.domandaStateService.decreaseQuestionsLeft();
+    this.isAnswered = true;
+
+    if (this.domandaStateService.questionsLeft == 0) {
+      this.domandaStateService.isFinished = true;
       this.openDialog();
     }
   }
 
   openDialog(): void {
-    console.log(DomandaItemComponent.counterCorrect)
     const dialogRef = this.dialog.open(
       DialogQuizResultsComponent,
-      {data: {correctAnswers: DomandaItemComponent.counterCorrect}
+      {
+        data: {correctAnswers: this.domandaStateService.correctAnswers}
       });
   }
 }

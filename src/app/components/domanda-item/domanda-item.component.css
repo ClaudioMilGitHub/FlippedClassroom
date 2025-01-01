@@ -4,9 +4,18 @@
   background-color: lightgray;
 }
 
+.mat-list-item {
+  background-color: lightgray;
+}
+
 .correct-answer {
   font-weight: bold;
   color: green;
+}
+
+.wrong-answer {
+  font-weight: bold;
+  color: red;
 }
 
 mat-list-item {
@@ -18,3 +27,8 @@ mat-list-item {
 mat-icon {
   vertical-align: middle;
 }
+
+
+
+
+

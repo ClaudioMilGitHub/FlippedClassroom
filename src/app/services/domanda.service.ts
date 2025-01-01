@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Result} from "../models/Result";
+import {QuestionRequest} from "../models/Question/QuestionRequest";
 import {QuizOptions} from "../models/QuizOptions";
 
 @Injectable({
@@ -9,7 +9,7 @@ import {QuizOptions} from "../models/QuizOptions";
 })
 export class DomandaService {
 
-  results: Result;
+  results: QuestionRequest;
 
   constructor(private http: HttpClient) {
   }
@@ -19,17 +19,17 @@ export class DomandaService {
     const baseUrl = "https://opentdb.com/api.php?";
     const params = new URLSearchParams();
 
-    if(typeof options !== "undefined") {
-      if(options?.amount) {
+    if (typeof options !== "undefined"){
+      if (options?.amount) {
         params.append('amount', options.amount.toString());
       }
-      if(options?.category) {
+      if (options?.category) {
         params.append('category', options.category.toString());
       }
-      if(options?.difficulty) {
+      if (options?.difficulty) {
         params.append('difficulty', options.difficulty.toString());
       }
-      if(options?.type) {
+      if (options?.type) {
         params.append('type', options.type.toString());
       }
       return baseUrl + params.toString();
@@ -37,7 +37,7 @@ export class DomandaService {
     return baseUrl + 'amount=10';
   }
 
-  getResult(options: QuizOptions): Observable<Result> {
-    return this.http.get<Result>(this.buildQuizUrl(options));
+  getResult(options: QuizOptions): Observable<QuestionRequest> {
+    return this.http.get<QuestionRequest>(this.buildQuizUrl(options));
   }
 }

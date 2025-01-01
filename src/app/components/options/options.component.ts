@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   templateUrl: './options.component.html',
   styleUrls: ['./options.component.css']
 })
-export class OptionsComponent implements OnInit, OnDestroy{
+export class OptionsComponent implements OnInit, OnDestroy {
 
   optionsForm: FormGroup;
   categories: Category[];
@@ -21,12 +21,12 @@ export class OptionsComponent implements OnInit, OnDestroy{
   constructor(private categoryService: CategoryService, private router: Router) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.optionsForm = new FormGroup({
-      amount: new FormControl(Validators.min(1)),
-      category: new FormControl(),
-      difficulty: new FormControl(),
-      type: new FormControl()
+      amount: new FormControl(1 ,[Validators.min(1), Validators.max(50)]),
+      category: new FormControl(''),
+      difficulty: new FormControl(''),
+      type: new FormControl('')
     })
     this.categorySub = this.categoryService.getCategoryRequest().subscribe({
       next: (categoryResponse) => {
@@ -52,7 +52,7 @@ export class OptionsComponent implements OnInit, OnDestroy{
   }
 
   makeRequestOptions(): void {
-    if(this.optionsForm.valid) {
+    if (this.optionsForm.valid) {
       this.options = {
         amount: this.amount.value,
         category: this.category.value,
@@ -63,11 +63,11 @@ export class OptionsComponent implements OnInit, OnDestroy{
     }
   }
 
-  getRequestOptions(): QuizOptions  {
+  getRequestOptions(): QuizOptions {
     return this.options;
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.categorySub?.unsubscribe();
   }
 
