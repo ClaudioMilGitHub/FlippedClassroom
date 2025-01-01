@@ -58,7 +58,10 @@ export class DomandaItemComponent implements OnInit {
     const dialogRef = this.dialog.open(
       DialogQuizResultsComponent,
       {
-        data: {correctAnswers: this.domandaStateService.correctAnswers}
+        data: {
+          correctAnswers: this.domandaStateService.correctAnswers,
+          wrongAnswers: this.domandaStateService.wrongAnswers
+        }
       });
   }
 }

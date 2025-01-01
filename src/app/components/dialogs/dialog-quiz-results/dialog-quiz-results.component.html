@@ -1,10 +1,35 @@
-<h1 mat-dialog-title>Dettagli Utente</h1>
-<div mat-dialog-content>
-  <p>
-    Correct Answers: {{ data.correctAnswers }}
-  </p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Close</button>
-  <button mat-button (click)="closeDialogAndRestart()">Restart</button>
+<div class="body">
+  <h1 mat-dialog-title class="text-primary-emphasis align-items-center">Quiz completed!
+  <mat-icon>
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000F5"><path d="M480-80q-26 0-47-12.5T400-126q-33 0-56.5-23.5T320-206v-142q-59-39-94.5-103T190-590q0-121 84.5-205.5T480-880q121 0 205.5 84.5T770-590q0 77-35.5 140T640-348v142q0 33-23.5 56.5T560-126q-12 21-33 33.5T480-80Zm-80-126h160v-36H400v36Zm0-76h160v-38H400v38Zm-8-118h58v-108l-88-88 42-42 76 76 76-76 42 42-88 88v108h58q54-26 88-76.5T690-590q0-88-61-149t-149-61q-88 0-149 61t-61 149q0 63 34 113.5t88 76.5Zm88-162Zm0-38Z"/></svg>
+  </mat-icon>
+  </h1>
+  <div mat-dialog-content class="content">
+    <h3 class="text-secondary-emphasis">Here's the results</h3>
+    <mat-list>
+      <mat-list-item class="d-flex align-items-center">
+        <mat-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#75FB4C"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+        </mat-icon>
+        <span class="text-secondary"> {{ data.correctAnswers }} correct answers</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+        </mat-icon>
+        <span class="text-secondary">{{ data.wrongAnswers }} wrong answers</span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-between">
+    <button mat-button (click)="closeDialog()">
+      Close
+    </button>
+    <button mat-button (click)="closeDialogAndRestart()" class="d-flex align-items-center">
+      <span>Go to Options</span>
+      <mat-icon class="d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/></svg>
+      </mat-icon>
+    </button>
+  </div>
 </div>

@@ -11,7 +11,7 @@ export class DialogQuizResultsComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogQuizResultsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { correctAnswers: number },
+    @Inject(MAT_DIALOG_DATA) public data: { correctAnswers: number, wrongAnswers: number },
     private router: Router,
   ) {
   }
