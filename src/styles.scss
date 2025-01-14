@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+$my-primary: mat.define-palette((
+  900: #0d47a1, // Blu scuro per testi su sfondi chiari
+  800: #1565c0,
+  700: #1976d2, // Colore principale
+  600: #1e88e5,
+  500: #2196f3, // Colore di default
+  400: #42a5f5,
+  300: #64b5f6,
+  200: #90caf9,
+  100: #bbdefb, // Colore per hover o sfondi leggeri
+  50: #e3f2fd, // Colore per sfondi molto chiari
+  contrast: (
+    900: #ffffff, // Contrasto per il blu scuro
+    800: #ffffff,
+    700: #ffffff,
+    600: #ffffff,
+    500: #ffffff,
+    400: #000000,
+    300: #000000,
+    200: #000000,
+    100: #000000,
+    50: #000000,
+  )
+));
+
+$my-accent: mat.define-palette((
+  900: #ff6f00,
+  800: #ff8f00,
+  700: #ffa000,
+  600: #ffb300,
+  500: #ffc107, // Colore principale accentuato
+  400: #ffd54f,
+  300: #ffe082,
+  200: #ffecb3,
+  100: #fff8e1,
+  50: #fffde7,
+  A700: #ff6f00,
+  A400: #ffa000,
+  A200: #ffca28,
+  A100: #ffe082,
+  contrast: (
+    900: #ffffff,
+    800: #ffffff,
+    700: #ffffff,
+    600: #ffffff,
+    500: #000000,
+    400: #000000,
+    300: #000000,
+    200: #000000,
+    100: #000000,
+    50: #000000,
+    A700: #ffffff,
+    A400: #000000,
+    A200: #000000,
+    A100: #000000,
+  )
+));
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: mat.define-palette(mat.$red-palette), // Rosso per avvisi o errori
+  ),
+  density: 0, // Layout standard
+));
+
+@include mat.all-component-themes($my-theme);
+
+html, body {
+  height: 100vh;
+  background-color: map-get($my-primary, 50);
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

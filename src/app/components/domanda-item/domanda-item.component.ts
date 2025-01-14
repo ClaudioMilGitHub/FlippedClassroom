@@ -9,7 +9,7 @@ import {Answer} from "../../models/Answer/Answer";
 @Component({
   selector: 'app-domanda-item',
   templateUrl: './domanda-item.component.html',
-  styleUrls: ['./domanda-item.component.css']
+  styleUrls: ['./domanda-item.component.scss']
 })
 export class DomandaItemComponent implements OnInit {
 
@@ -29,15 +29,12 @@ export class DomandaItemComponent implements OnInit {
 
   ngOnInit() {
     this.domandaStateService.resetState();
-    console.log(this.item);
+    this.domandaStateService.questionsLeft = this.options.amount;
     this.correctAnswer = this.item.answerDTOS.find(answer => answer.isCorrect);
 
   }
 
   checkAnswer(selectedAnswer: Answer, index: number): void {
-
-    console.log(selectedAnswer.answerText, selectedAnswer.isCorrect);
-
     if (selectedAnswer.isCorrect) {
       this.domandaStateService.increaseCorrectAnswer();
       this.isCorrect = true;
@@ -50,10 +47,10 @@ export class DomandaItemComponent implements OnInit {
     this.domandaStateService.decreaseQuestionsLeft();
     this.isAnswered = true;
 
-    // if (this.domandaStateService.questionsLeft == 0) {
-    //   this.domandaStateService.isFinished = true;
-    //   this.openDialog();
-    // }
+    if (this.domandaStateService.questionsLeft == 0) {
+      this.domandaStateService.isFinished = true;
+      this.openDialog();
+    }
   }
 
   openDialog(): void {

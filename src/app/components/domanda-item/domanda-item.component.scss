@@ -1,0 +1,54 @@
+@use 'src/styles.scss' as *;
+
+.question-card {
+  margin: 16px 0;
+  padding: 16px;
+  background-color: lightgray;
+}
+
+.mat-list-item {
+  background-color: lightgray;
+}
+
+.correct-answer {
+  font-weight: bold;
+  color: green;
+}
+
+.wrong-answer {
+  font-weight: bold;
+  color: red;
+}
+
+.question-card {
+  background-color: map-get($my-primary, 100);
+}
+
+mat-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-icon {
+  vertical-align: middle;
+}
+
+.correction {
+  color: map-get($my-primary, 900);
+}
+
+.btn-answer {
+  color: black;
+  background-color: map-get($my-accent, 300);
+}
+
+.btn-answer:hover {
+  background-color: map-get($my-accent, 500);
+}
+
+.btn-answer:disabled {
+  background-color: map-get($my-accent, 200);
+}
+
+

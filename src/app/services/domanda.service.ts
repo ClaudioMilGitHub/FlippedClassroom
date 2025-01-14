@@ -21,7 +21,6 @@ export class DomandaService {
     const params = new URLSearchParams();
 
     if (typeof options !== "undefined"){
-      console.log(options)
 
       if (options?.category) {
         params.append('categoryId', options.category.toString());
@@ -37,7 +36,6 @@ export class DomandaService {
       if(options?.amount) {
         params.append('amount', options.amount.toString());
       }
-      console.log('URL' + baseUrl + params.toString());
       return baseUrl + params.toString();
     }
 

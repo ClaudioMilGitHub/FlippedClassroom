@@ -8,7 +8,7 @@
     <div>
       <mat-list>
         <mat-list-item *ngFor="let answer of item.answerDTOS; let i = index">
-          <button mat-raised-button color="primary" (click)="checkAnswer(answer, i)" [ngClass]="feedback(i)" [disabled]="isAnswered">
+          <button mat-raised-button class="btn-answer" (click)="checkAnswer(answer, i)" [ngClass]="feedback(i)" [disabled]="isAnswered">
             {{ answer.answerText }}
           </button>
         </mat-list-item>
@@ -18,7 +18,7 @@
       <p class="mt-2 text-success fs-3" *ngIf="isCorrect; else notCorrect">Correct Answer!</p>
       <ng-template #notCorrect>
         <p class="mt-2 text-danger fs-3">Wrong Answer!</p>
-        <p class="text-primary mt-2"> Correct answer is: {{ showCorrectAnswer() }} </p>
+        <p class="correction mt-2"> Correct answer is: {{ showCorrectAnswer() }} </p>
       </ng-template>
     </div>
   </mat-card-content>

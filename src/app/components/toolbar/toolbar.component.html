@@ -1,15 +1,15 @@
 <p>
-  <mat-toolbar class="w-100">
+  <mat-toolbar class="toolbar w-100">
     <mat-nav-list class="toolbar w-100 d-flex justify-content-between align-items-center">
       <div class="home-btn d-flex align-items-center">
-        <a mat-icon-button routerLink="homepage" class="text-decoration-none">
+        <a mat-icon-button routerLink="homepage" routerLinkActive="active" class="anchor-home text-decoration-none">
           <mat-icon>home</mat-icon>
         </a>
         <span>Flipped Classroom</span>
       </div>
       <div class="nav-btns d-flex">
-        <a mat-raised-button class="mx-2" routerLink="/quiz-list">Start Game</a>
-        <a mat-raised-button class="mx-2" routerLink="/options">Options</a>
+        <a mat-raised-button color="primary" class="btn-start-game mx-2" routerLink="/quiz-list">Start Game</a>
+        <a mat-raised-button color="accent" class="mx-2" routerLink="/options">Options</a>
       </div>
     </mat-nav-list>
   </mat-toolbar>

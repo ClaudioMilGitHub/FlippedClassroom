@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+@use 'src/styles.scss' as *;
+
+// Stili personalizzati per i form field
+.custom-form-field {
+  margin-bottom: 16px;
+
+  .mat-form-field-label {
+    color: map-get($my-primary, 500);
+  }
+
+  .mat-form-field-underline {
+    background-color: map-get($my-primary, 300);
+  }
+
+  .mat-form-field-ripple {
+    background-color: map-get($my-primary, 500);
+  }
+}
+
+// Stili personalizzati per il pulsante
+.submit-button {
+  background-color: map-get($my-primary, 500);
+  color: map-get($my-primary, 50);
+  font-weight: bold;
+
+  &:hover {
+    background-color: map-get($my-primary, 600);
+  }
+
+  &:disabled {
+    background-color: map-get($my-primary, 200);
+    color: map-get($my-primary, 100);
+  }
+}
+
+// Stili per la card
+.options-card {
+  background-color: map-get($my-primary, 50);
+  border: 1px solid map-get($my-primary, 300);
+  border-radius: 8px;
+  padding: 16px;
+
+}

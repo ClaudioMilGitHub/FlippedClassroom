@@ -24,17 +24,15 @@ export class DomandaListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.resultSub = this.domandaService.getResult(this.options).subscribe({
       next: (response) => {
         this.result = response;
 
         this.result.forEach(t => {
           t.questionText = new DOMParser().parseFromString(t.questionText, 'text/html').body.textContent;
-          console.log(t.answerDTOS);
-          console.log(t.categoryDTO);
           t.answerDTOS = this.shuffleArray(t.answerDTOS);
         });
-
 
 
         // this.result.results.forEach((t) => {

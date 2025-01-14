@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-dialog-quiz-results',
   templateUrl: './dialog-quiz-results.component.html',
-  styleUrls: ['./dialog-quiz-results.component.css']
+  styleUrls: ['./dialog-quiz-results.component.scss']
 })
 export class DialogQuizResultsComponent {
 

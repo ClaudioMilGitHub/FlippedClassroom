@@ -3,21 +3,32 @@
     <mat-card class="options-card mx-auto w-100">
       <mat-card-content>
         <form [formGroup]="optionsForm" (ngSubmit)="makeRequestOptions()" class="d-flex flex-column w-100">
-          <mat-form-field>
+          <!-- Campo per il numero di domande -->
+          <mat-form-field appearance="fill" class="custom-form-field">
             <mat-label>Number of Questions</mat-label>
             <input matNativeControl type="number" matInput formControlName="amount">
             <mat-hint class="text-secondary">Put a number equal or greater than 1</mat-hint>
-            <mat-error *ngIf="amount.touched && amount.dirty && amount.hasError('min')">Choose number of questions 1 or greater!.</mat-error>
-            <mat-error *ngIf="amount.touched && amount.dirty && amount.hasError('max')">Choose number of questions 50 or lower!.</mat-error>
+            <mat-error *ngIf="amount.touched && amount.dirty && amount.hasError('min')">
+              Choose number of questions 1 or greater!.
+            </mat-error>
+            <mat-error *ngIf="amount.touched && amount.dirty && amount.hasError('max')">
+              Choose number of questions 50 or lower!.
+            </mat-error>
           </mat-form-field>
-          <mat-form-field>
+
+          <!-- Campo per la categoria -->
+          <mat-form-field appearance="fill" class="custom-form-field">
             <mat-label>Select Category</mat-label>
             <mat-select formControlName="category">
               <mat-option value="">None</mat-option>
-              <mat-option value="{{ category.id }}" *ngFor="let category of categories">{{ category.name }}</mat-option>
+              <mat-option value="{{ category.id }}" *ngFor="let category of categories">
+                {{ category.name }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
+
+          <!-- Campo per la difficoltà -->
+          <mat-form-field appearance="fill" class="custom-form-field">
             <mat-label>Select Difficulty</mat-label>
             <mat-select formControlName="difficulty">
               <mat-option value="">None</mat-option>
@@ -26,7 +37,9 @@
               <mat-option value="2"> Hard</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
+
+          <!-- Campo per il tipo di domande -->
+          <mat-form-field appearance="fill" class="custom-form-field">
             <mat-label>Select Type</mat-label>
             <mat-select formControlName="type">
               <mat-option value="">None</mat-option>
@@ -34,13 +47,16 @@
               <mat-option value="0"> Multiple Choice</mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-raised-button color="primary" [disabled]="!optionsForm.valid" >Play with these options!</button>
+
+          <!-- Pulsante di invio -->
+          <button mat-raised-button color="primary" [disabled]="!optionsForm.valid" class="submit-button">
+            Play with these options!
+          </button>
         </form>
-        <legend class="mt-3 fs-6 text-warning-emphasis">Category is food by default if not selected. Difficulty and Type are optional.</legend>
+        <legend class="mt-3 fs-6 text-warning-emphasis">
+          Category is food by default if not selected. Difficulty and Type are optional.
+        </legend>
       </mat-card-content>
     </mat-card>
-
-
   </div>
 </div>
-

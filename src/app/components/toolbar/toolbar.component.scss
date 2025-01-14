@@ -1,0 +1,23 @@
+@use 'src/styles.scss' as *;
+
+.title {
+  color: black;
+}
+
+.toolbar {
+  background-color: map-get($my-primary, 200);
+}
+
+.btn-start-game {
+  color: map-get($my-primary, 100);
+}
+
+.anchor-home {
+  color: map-get($my-primary, 700);
+
+}
+
+.anchor-home:hover {
+  color: map-get($my-accent, 500);
+}
+
