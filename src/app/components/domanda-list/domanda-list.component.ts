@@ -5,6 +5,8 @@ import {DomandaService} from "../../services/domanda.service";
 import {QuizOptions} from "../../models/QuizOptions";
 import {CategoryService} from "../../services/category.service";
 import {Router} from "@angular/router";
+import {Question} from "../../models/Question/Question";
+import {Answer} from "../../models/Answer/Answer";
 
 @Component({
   selector: 'app-domanda-list',
@@ -13,7 +15,7 @@ import {Router} from "@angular/router";
 })
 export class DomandaListComponent implements OnInit, OnDestroy {
 
-  result: QuestionRequest;
+  result: Question[];
   resultSub: Subscription;
   options: QuizOptions;
 
@@ -25,21 +27,31 @@ export class DomandaListComponent implements OnInit, OnDestroy {
     this.resultSub = this.domandaService.getResult(this.options).subscribe({
       next: (response) => {
         this.result = response;
-        this.result.results.forEach((t) => {
-          t.question = new DOMParser().parseFromString(t.question, 'text/html').body.textContent;
-          const allAnswers = [...t.incorrect_answers, t.correct_answer];
-          const shuffledAnswers = this.shuffleArray(allAnswers);
 
-          t.mixedAnswers = shuffledAnswers.map(answer => ({
-            text: answer,
-            isCorrect: answer === t.correct_answer
-          }))
-        })
+        this.result.forEach(t => {
+          t.questionText = new DOMParser().parseFromString(t.questionText, 'text/html').body.textContent;
+          console.log(t.answerDTOS);
+          console.log(t.categoryDTO);
+          t.answerDTOS = this.shuffleArray(t.answerDTOS);
+        });
+
+
+
+        // this.result.results.forEach((t) => {
+        //   t.question = new DOMParser().parseFromString(t.question, 'text/html').body.textContent;
+        //   const allAnswers = [...t.incorrect_answers, t.correct_answer];
+        //   const shuffledAnswers = this.shuffleArray(allAnswers);
+        //
+        //   t.mixedAnswers = shuffledAnswers.map(answer => ({
+        //     text: answer,
+        //     isCorrect: answer === t.correct_answer
+        //   }))
+        // })
       }
     })
   }
 
-  private shuffleArray(array: string[]): string[] {
+  private shuffleArray(array: Answer[]): Answer[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];

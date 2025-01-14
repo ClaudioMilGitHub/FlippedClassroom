@@ -1,11 +1,15 @@
+import {Difficulty} from "./Difficulty";
+import {Type} from "./Type";
+import {Category} from "../Category/Category";
+import {Answer} from "../Answer/Answer";
+
 export interface Question {
-  type?: string;
-  difficulty?: string;
-  question?: string;
-  correct_answer?: string;
-  incorrect_answers?: string[];
-  mixedAnswers?: {
-    text: string,
-    isCorrect: boolean
-  }[];
+
+  questionText: string;
+  difficulty?: Difficulty;
+  type?: Type;
+
+  categoryDTO: Category;
+  answerDTOS: Answer[];
+
 }

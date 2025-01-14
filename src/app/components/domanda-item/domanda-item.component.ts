@@ -1,10 +1,10 @@
-import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Question} from "../../models/Question/Question";
 import {QuizOptions} from "../../models/QuizOptions";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogQuizResultsComponent} from "../dialogs/dialog-quiz-results/dialog-quiz-results.component";
 import {DomandaStateService} from "../../services/domanda-state.service";
-import {ActivatedRoute} from "@angular/router";
+import {Answer} from "../../models/Answer/Answer";
 
 @Component({
   selector: 'app-domanda-item',
@@ -15,10 +15,13 @@ export class DomandaItemComponent implements OnInit {
 
   @Input('item') item: Question;
   @Input('options') options: QuizOptions;
+
   isSelected: boolean = false;
   isCorrect: boolean;
   isAnswered: boolean = false;
+
   selectedIndex: number;
+  correctAnswer: Answer;
 
 
   constructor(private dialog: MatDialog, private domandaStateService: DomandaStateService) {
@@ -26,16 +29,15 @@ export class DomandaItemComponent implements OnInit {
 
   ngOnInit() {
     this.domandaStateService.resetState();
-    if (typeof this.options === 'undefined') {
-      this.options = {
-        amount: 10
-      }
-    }
-    this.domandaStateService.questionsLeft = this.options.amount;
-    this.item.mixedAnswers;
+    console.log(this.item);
+    this.correctAnswer = this.item.answerDTOS.find(answer => answer.isCorrect);
+
   }
 
-  checkAnswer(selectedAnswer: { text: string, isCorrect: boolean }, index: number): void {
+  checkAnswer(selectedAnswer: Answer, index: number): void {
+
+    console.log(selectedAnswer.answerText, selectedAnswer.isCorrect);
+
     if (selectedAnswer.isCorrect) {
       this.domandaStateService.increaseCorrectAnswer();
       this.isCorrect = true;
@@ -48,10 +50,10 @@ export class DomandaItemComponent implements OnInit {
     this.domandaStateService.decreaseQuestionsLeft();
     this.isAnswered = true;
 
-    if (this.domandaStateService.questionsLeft == 0) {
-      this.domandaStateService.isFinished = true;
-      this.openDialog();
-    }
+    // if (this.domandaStateService.questionsLeft == 0) {
+    //   this.domandaStateService.isFinished = true;
+    //   this.openDialog();
+    // }
   }
 
   openDialog(): void {
@@ -61,4 +63,16 @@ export class DomandaItemComponent implements OnInit {
         data: {correctAnswers: this.domandaStateService.correctAnswers}
       });
   }
+
+  feedback(index: number): string {
+    if (this.selectedIndex === index && this.isAnswered) {
+      return this.isCorrect ? 'correct-answer' : 'wrong-answer';
+    }
+    return '';
+  }
+
+  showCorrectAnswer(): string  {
+    return this.correctAnswer.answerText;
+  }
+
 }

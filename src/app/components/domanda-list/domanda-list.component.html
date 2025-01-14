@@ -1,7 +1,7 @@
 <div class="" *ngIf="result; else loading">
-  <div *ngIf="result.results?.length > 0; else noResults">
-    <mat-list *ngFor="let item of result.results">
-      <app-domanda-item  [options]="options" [item]="item"></app-domanda-item>
+  <div *ngIf="result?.length > 0; else noResults">
+    <mat-list *ngFor="let question of result">
+      <app-domanda-item  [options]="options" [item]="question"></app-domanda-item>
     </mat-list>
   </div>
 </div>

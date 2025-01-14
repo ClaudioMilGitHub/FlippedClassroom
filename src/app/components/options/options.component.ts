@@ -29,8 +29,9 @@ export class OptionsComponent implements OnInit, OnDestroy {
       type: new FormControl('')
     })
     this.categorySub = this.categoryService.getCategoryRequest().subscribe({
-      next: (categoryResponse) => {
-        this.categories = categoryResponse.trivia_categories;
+      next: (category) => {
+        this.categories = category;
+        console.log(category);
       }
     })
   }
@@ -59,6 +60,7 @@ export class OptionsComponent implements OnInit, OnDestroy {
         difficulty: this.difficulty.value,
         type: this.type.value,
       }
+
       this.router.navigateByUrl('quiz-list', {state: this.getRequestOptions()})
     }
   }
